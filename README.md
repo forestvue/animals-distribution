@@ -30,7 +30,7 @@ Visual Studio Code나 Webstorm IDE 사용을 적극 권장합니다.
    
    /dashboard/`:animal_type` - 특정 타입의 동물들의 리스트를 출력
    
-   **/`else url` - 나머지 경로 접근에 대해 경고 화면 출력 **
+   /`else url` - **나머지 경로 접근에 대해 경고 화면 출력**
    
 2. 각 컴포넌트는 최소한 별도의 `<template></template>`을 가지고 있어야 합니다.
 
