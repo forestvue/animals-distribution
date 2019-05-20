@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>gg</h1>
+    <h1>ani</h1>
+    <!-- <div v-for="animal in animals" v-bind:key="animal">{{animal}}</div> -->
     <list :datas="animals"/>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -22,9 +22,9 @@ export default {
   },
   created() {
       console.log(this.$route.params.animal_type);
-    if (this.$route.params.animal_type != null) {
-    } else {
-      db.collection("animals")
+      if(this.$route.params.animal_type != null) {
+      var animal_type = this.$route.params.animal_type;
+      db.collection("animals").doc(animal_type).collection('list')
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
@@ -33,7 +33,16 @@ export default {
             this.animals.push(doc.data());
           });
         });
-    }
+      }else {
+          db.collection("animals")
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            console.log(`${doc.id} => ${doc.data()}`);
+            this.animals.push(doc.id);
+          });
+        });
+      }
   },
   components: {
     list: List
