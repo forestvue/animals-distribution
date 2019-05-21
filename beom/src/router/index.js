@@ -18,14 +18,18 @@ export default new Router({
       path: '/dashboard',
       name: 'DashBoard',
       component: DashBoard,
-      children: [
-        {
-          path: ':animal_type',
-      name: 'AnimalDetail',
-      component: AnimalDetail,
-        }
+      // children: [
+      //   {
+      //     path: ':animal_type',
+      // name: 'AnimalDetail',
+      // component: AnimalDetail,
+      //   }
         
-      ]
+      // ]
+    },{
+      path: '/dashboard/:animal_type',
+  name: 'AnimalDetail',
+  component: AnimalDetail,
     },
     {
       path: '*',

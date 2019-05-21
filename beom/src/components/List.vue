@@ -6,7 +6,9 @@
           <router-link :to="'dashboard/'+data.animal_id">{{data.animal_id}}</router-link>
         </div>
         <div v-else>
-            {{data.name}}
+            <span>{{data.name}}</span>
+            <span>{{data.age}}</span>
+            <img :src="data.imgPath" alt="">
             </div>
       </li>
     </ul>
