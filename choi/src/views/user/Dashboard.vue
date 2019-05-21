@@ -4,14 +4,8 @@
 
 <script>
 export default {
-  name: 'User',
-  created: function () {
-    this.$db.collection('animals')
-      .get()
-      .then((res) => {
-        res.forEach((doc) => console.log(doc.id))
-      })
-  }
+  name: 'User'
+
 }
 </script>
 
