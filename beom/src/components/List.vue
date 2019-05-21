@@ -1,9 +1,13 @@
 <template>
   <div class="list-container">
     <ul>
-      <li v-for="data in datas" v-bind:key="data.animal_id">
+      <li v-for="(data, index) in datas" v-bind:key="data.animal_id">
         <div v-if="data.name == undefined">
-          <router-link :style="{color: setColor}" class="link-button" :to="'dashboard/'+data.animal_id">{{data.animal_id}}</router-link>
+          <router-link
+            :style="{color: setColor(index)}"
+            class="link-button"
+            :to="'dashboard/'+data.animal_id"
+          >{{data.animal_id}}</router-link>
         </div>
         <div class="animal-card" v-else>
           <img :src="data.imgPath" alt>
@@ -22,12 +26,17 @@ export default {
     // 계산된 getter
     setColor: function() {
       // `this` 는 vm 인스턴스를 가리킵니다.
-      var letters = "0123456789ABCDEF";
-      var color = "#";
-      for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
+
+      return index => {
+        console.log(index);
+
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
     }
   }
 };
