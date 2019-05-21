@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="list-container">
     <ul>
       <li v-for="data in datas" v-bind:key="data.animal_id">
         <div v-if="data.name == undefined">
-          <router-link :to="'dashboard/'+data.animal_id">{{data.animal_id}}</router-link>
+          <router-link :style="{color: setColor}" class="link-button" :to="'dashboard/'+data.animal_id">{{data.animal_id}}</router-link>
         </div>
-        <div v-else>
-            <span>{{data.name}}</span>
-            <span>{{data.age}}</span>
-            <img :src="data.imgPath" alt="">
-            </div>
+        <div class="animal-card" v-else>
+          <img :src="data.imgPath" alt>
+          <span>name : {{data.name}}</span>
+          <span>age : {{data.age}}</span>
+        </div>
       </li>
     </ul>
   </div>
@@ -18,8 +18,45 @@
 <script>
 export default {
   props: ["datas"],
+  computed: {
+    // 계산된 getter
+    setColor: function() {
+      // `this` 는 vm 인스턴스를 가리킵니다.
+      var letters = "0123456789ABCDEF";
+      var color = "#";
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+  }
 };
 </script>
 
-<style>
+<style scoped>
+ul {
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  margin: 16px;
+}
+
+.animal-card {
+  border: 1px solid blue;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.animal-card img {
+  width: 200px;
+  height: 200px;
+}
+
+.animal-card span {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
 </style>

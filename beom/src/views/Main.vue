@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link to='/dashboard'>Go DashBoard</router-link>
+        <router-link class="link-button" to='/dashboard'>Go DashBoard</router-link>
     </div>
 </template>
 
@@ -10,6 +10,6 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    
 </style>

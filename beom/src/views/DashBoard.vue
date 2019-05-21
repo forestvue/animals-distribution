@@ -1,19 +1,12 @@
 <template>
   <div>
-    <h1>gg</h1>
     <list :datas="animals"/>
-    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import List from "../components/List.vue";
 import { db } from "../main";
-// console.log(db
-//         .collection("animals")
-//         .doc("dog")
-//         .collection("list"));
-
 export default {
   data() {
     return {
@@ -21,19 +14,15 @@ export default {
     };
   },
   created() {
-      console.log(this.$route.params.animal_type);
-    if (this.$route.params.animal_type != null) {
-    } else {
-      db.collection("animals")
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            console.log(`${doc.id} => ${doc.data()}`);
-            console.log(doc.data());
-            this.animals.push(doc.data());
-          });
+    db.collection("animals")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          console.log(`${doc.id} => ${doc.data()}`);
+          console.log(doc.data());
+          this.animals.push(doc.data());
         });
-    }
+      });
   },
   components: {
     list: List
