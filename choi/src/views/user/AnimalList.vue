@@ -1,6 +1,8 @@
 <template>
-  <div>
+
+  <div class="animal-list">
     <h3>List of animals</h3>
+
     <table>
       <tr>
         <th>kind</th>
@@ -75,5 +77,12 @@ export default {
 </script>
 
 <style scoped>
+  animal-list{
+    text-align: center;
+  }
+  table{
+    margin: auto;
+    width: 50%;
+  }
 
 </style>

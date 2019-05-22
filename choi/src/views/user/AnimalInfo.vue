@@ -25,25 +25,40 @@ export default {
       animalList: []
     }
   },
+  methods: {
+    getData: function () {
+      this.$db.collection('animals').doc(this.$route.params.animal_type).collection('list')
+        .get()
+        .then((docs) => {
+          docs.forEach(
+            (doc) => {
+              let animal = doc.data()
+              this.animalList.push({
+                id: doc.id,
+                name: animal.name,
+                age: animal.age,
+                src: animal.imgPath
+              })
+            }
+          )
+        })
+    }
+  },
   created () {
-    this.$db.collection('animals').doc(this.$route.params.animal_type).collection('list')
-      .get()
-      .then((docs) => {
-        docs.forEach(
-          (doc) => {
-            let animal = doc.data()
-            this.animalList.push({
-              id: doc.id,
-              name: animal.name,
-              age: animal.age,
-              src: animal.imgPath
-            })
-          }
-        )
-      })
+    this.getData()
+  },
+  watch: {
+    '$route.params.animal_type': function (id) {
+      this.animalList.length = 0
+      this.getData()
+    }
   }
+
 }
 </script>
 <style scoped>
-
+  table{
+    margin: auto;
+    width: 50%;
+  }
 </style>
