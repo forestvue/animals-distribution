@@ -14,13 +14,6 @@
             
         </div>
 
-        <div class="navbar-nav">
-            <router-link to="/user" class="nav-link" active-class="active">
-            User
-            </router-link>
-            
-        </div>
-
     </nav>
 </template>
 
