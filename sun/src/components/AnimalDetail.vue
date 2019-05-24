@@ -7,22 +7,49 @@
                 <p>age: {{list.age}}</p>
                 <p>name: {{list.name}}</p>
             </li>
-        </ul> 
+            
+        </ul>
+
     </div>
 </template>
 
 <script>
     import {db} from "../firebase.js"
+
     export default {
         name: "animalDetail",
         data() {
             return {
-                lists: []
+                lists: [],
+                ref: db.collection("animals")
             }
         },
         firestore() {
             return {
-                lists:db.collection("animals").doc(this.$route.params.animal_type).collection("list")
+                lists:this.ref.doc(this.$route.params.animal_type).collection("list")
+            }
+        },
+        methods: {
+            getData: function(){
+                const ref=db.collection("animals").doc(this.$route.params.animal_type).collection("list")
+                ref.onSnapshot((querySnapshot)=> {
+                    this.lists=[];
+                    querySnapshot.forEach(((doc)=> {
+                        this.lists.push({
+                            age: doc.data().age,
+                            imgPath: doc.data().imgPath,
+                            name: doc.data().name
+                        })
+                    }))
+
+                })
+                
+            }
+        },
+         //다른 url로 접속해도 data 바뀌게
+        watch: {
+            "$route.params.animal_type": function(){
+                this.getData()
             }
         }
     }

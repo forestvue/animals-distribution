@@ -1,11 +1,13 @@
 <template>
     <div id="dashboard">
         <h1>AnimalList</h1>
-        <input type="text" v-model="newAnimal" 
-        v-on:keyup.enter="addNewAnimal"
-        placeholder="Add Animals"
+        <input type="text" 
+            v-model="newAnimal" 
+            v-on:keyup.enter="addNewAnimal"
+            placeholder="Add Animals"
         >
-        <button v-on:click="addNewAnimal">Add</button>    
+        <button v-on:click="addNewAnimal">Add</button>
+            
         
         <ul class="animalList">
             <li v-for="animal in animals" 
@@ -41,9 +43,13 @@
         methods: {
             addNewAnimal: function(){
                 db.collection("animals").add({
-                    name: this.newAnimal
+                    //필드명으로 추가하면 됨
+                    animal_id:this.newAnimal
                 });
+                
                 this.newAnimal="";
+                
+                
             },
             deleteAnimal : function(animal){
                 db.collection("animals").doc(animal['.key']).delete();
@@ -54,6 +60,8 @@
     
             // }
         }
+       
+        
     }
 
 </script>

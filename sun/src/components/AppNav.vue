@@ -7,6 +7,7 @@
 
         </div>
 
+        <!-- active-class는 선택한 상태를 나타내주는 것 -->
         <div class="navbar-nav">
             <router-link to="/dashboard" class="nav-link" active-class="active">
             Dashboard
